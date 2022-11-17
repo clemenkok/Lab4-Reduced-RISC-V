@@ -32,7 +32,7 @@ int main(int argc, char **argv, char **env) {
         top->eval ();
     }
 
-    //reset feature
+    //reset feature using the toggle key on vbuddy
     if (vbdFlag()){  
       top->rst = 1;  
       vbdHex(4, top->rst & 0xF); //show rst value (on digit 4)
