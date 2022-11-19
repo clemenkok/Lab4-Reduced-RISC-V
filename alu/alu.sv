@@ -13,11 +13,14 @@ module alu #(
         case (ALUctrl)
         3'h0:   ALUout = ALUop1 + ALUop2;
         3'h1:   ALUout = ALUop1 - ALUop2;
-        3'h2:   ALUout = ALUop1 & ALUop2
+        3'h2:   ALUout = ALUop1 & ALUop2;
         3'h3:   ALUout = ALUop1 | ALUop2;
-        3'h5:   ALUout = A < B ? 1 : 0; // SET LESS THAN operation
+        3'h4:   ALUout = 0;
+        3'h5:   ALUout = ALUop1 < ALUop2 ? 1 : 0; // SET LESS THAN operation
+        3'h6:   ALUout = 0;
+        3'h7:   ALUout = 0;
         endcase
-        assign EQ = (A == B);
+        assign EQ = (ALUop1 == ALUop2);
     end
     
 endmodule
