@@ -11,11 +11,12 @@ VL_INLINE_OPT void Vsign_extend___024root___combo__TOP__0(Vsign_extend___024root
     Vsign_extend__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vsign_extend___024root___combo__TOP__0\n"); );
     // Body
-    vlSelf->ImmOp = (((0x98U == ((0x3f8U & (vlSelf->instr 
-                                            << 3U)) 
-                                 | (7U & (vlSelf->instr 
-                                          >> 0xcU)))) 
-                      & ((IData)(vlSelf->ImmSrc) >> 0xbU))
+    vlSelf->ImmOp = ((0x131U == ((0x7f0U & (vlSelf->instr 
+                                            << 4U)) 
+                                 | ((0xeU & (vlSelf->instr 
+                                             >> 0xbU)) 
+                                    | (1U & ((IData)(vlSelf->ImmSrc) 
+                                             >> 0xbU)))))
                       ? (0xfffff000U | (IData)(vlSelf->ImmSrc))
                       : (IData)(vlSelf->ImmSrc));
 }

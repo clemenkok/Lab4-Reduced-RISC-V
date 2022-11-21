@@ -1,4 +1,4 @@
-#include "Vsign_extend.h"
+#include "Vcontrol_unit.h"
 #include "verilated.h"
 #include "verilated_vcd_c.h"
 
@@ -8,17 +8,16 @@ int main(int argc, char **argv, char **env){
 
     Verilated::commandArgs(argc, argv);
     //init top verilog instance
-    Vsign_extend* top = new Vsign_extend;
+    Vcontrol_unit* top = new Vcontrol_unit;
     // init trace dump
     Verilated::traceEverOn(true);
     VerilatedVcdC* tfp = new VerilatedVcdC;
     top->trace (tfp, 99);
-    tfp->open ("sign_extend.vcd");
+    tfp->open ("control_unit.vcd");
 
     //initialize simulation inputs 
-    top->ImmOp = 0;
     top->instr = 0xfe0318e3;
-    top->ImmSrc = 0xFFF;
+    top->EQ = 0;
 
     // run simulation for many clock cycles
     for (int i=0; i<15; i++){
@@ -29,7 +28,7 @@ int main(int argc, char **argv, char **env){
             top->instr = 0x00000513;
         }
         else if (i==5){
-            top->instr = 0x00000593;
+            top->instr = 0xfe659ce3;
         }
         else if (i==7){
             top->instr = 0x00058513;
@@ -39,6 +38,7 @@ int main(int argc, char **argv, char **env){
         }
         else if (i==11){
             top->instr = 0xfe659ce3;
+            top->EQ = 1;
         }
         
 
