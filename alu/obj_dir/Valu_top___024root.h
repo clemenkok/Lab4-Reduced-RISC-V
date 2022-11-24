@@ -16,18 +16,22 @@ class Valu_top___024root final : public VerilatedModule {
     VL_IN8(clk,0,0);
     VL_IN8(RegWrite,0,0);
     VL_IN8(ALUsrc,0,0);
+    VL_IN8(data_mem_WE,0,0);
     VL_IN8(ALUctrl,2,0);
     VL_OUT8(EQ,0,0);
     CData/*0:0*/ __Vclklast__TOP__clk;
     VL_IN(ImmOp,31,0);
+    VL_IN(data_mem_WD,31,0);
     VL_IN(rs1,31,0);
     VL_IN(rs2,31,0);
     VL_IN(rd,31,0);
     VL_OUT(a0,31,0);
     IData/*31:0*/ alu_top__DOT__ALUop1;
     IData/*31:0*/ alu_top__DOT__ALUop2;
+    IData/*31:0*/ alu_top__DOT__ALUout;
     VlUnpacked<IData/*31:0*/, 32> alu_top__DOT__reg_file__DOT__regfile;
-    VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
+    VlUnpacked<IData/*31:0*/, 32> alu_top__DOT__data_mem__DOT__data_mem_register;
+    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
 
     // INTERNAL VARIABLES
     Valu_top__Syms* const vlSymsp;
