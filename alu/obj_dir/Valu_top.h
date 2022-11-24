@@ -28,9 +28,11 @@ class Valu_top VL_NOT_FINAL : public VerilatedModel {
     VL_IN8(&clk,0,0);
     VL_IN8(&RegWrite,0,0);
     VL_IN8(&ALUsrc,0,0);
+    VL_IN8(&data_mem_WE,0,0);
     VL_IN8(&ALUctrl,2,0);
     VL_OUT8(&EQ,0,0);
     VL_IN(&ImmOp,31,0);
+    VL_IN(&data_mem_WD,31,0);
     VL_IN(&rs1,31,0);
     VL_IN(&rs2,31,0);
     VL_IN(&rd,31,0);

@@ -14,9 +14,11 @@ Valu_top::Valu_top(VerilatedContext* _vcontextp__, const char* _vcname__)
     , clk{vlSymsp->TOP.clk}
     , RegWrite{vlSymsp->TOP.RegWrite}
     , ALUsrc{vlSymsp->TOP.ALUsrc}
+    , data_mem_WE{vlSymsp->TOP.data_mem_WE}
     , ALUctrl{vlSymsp->TOP.ALUctrl}
     , EQ{vlSymsp->TOP.EQ}
     , ImmOp{vlSymsp->TOP.ImmOp}
+    , data_mem_WD{vlSymsp->TOP.data_mem_WD}
     , rs1{vlSymsp->TOP.rs1}
     , rs2{vlSymsp->TOP.rs2}
     , rd{vlSymsp->TOP.rd}

@@ -25,6 +25,8 @@ int main(int argc, char **argv, char **env) {
   top->rs1 = 9; // 32-bit source register 1. we pick address at 9 for read op
   top->rs2 = 0; // 32-bit source register 2 
   top->rd = 6; // 32-bit dest register; we overwrite address at 6
+  top->data_mem_WE = 0; // for lw we don't need WE for datamem
+  top->data_mem_WD = 0; // for lw we don't need WE for datamem
 
   // run simulation for 500 clock cycles
   for (i=0; i<500; i++) {
