@@ -16,9 +16,10 @@ jobs:
           persist-credentials: false
           submodules: "recursive"
           fetch-depth: 2
-      - name: Execute sh file
+      - name: Create environment
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
+      - name: Build and Run Simulation
         run: |
-          bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
           chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
           cd Lab4-Reduced-RISC-V/risc_v_counter
           ./doit.sh
@@ -33,9 +34,10 @@ jobs:
           persist-credentials: false
           submodules: "recursive"
           fetch-depth: 2
-      - name: Execute sh file
+      - name: Create environment
+        run: bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
+      - name: Build and Run Simulation
         run: |
-          bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
           chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
           cd Lab4-Reduced-RISC-V/risc_v_counter
           ./doit.sh
