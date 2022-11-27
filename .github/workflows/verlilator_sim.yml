@@ -1,0 +1,27 @@
+name: Build Verilator simulation file
+
+on: push
+
+jobs:
+  ubuntu:
+    strategy:
+      matrix:
+        runner: [ubuntu-20.04]
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Execute sh file
+        run: |
+          bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
+          chmod +x risc_v_counter/doit.sh
+          cd risc_v_counter
+          ./doit.sh
+          
+  mac_os:
+    runs-on: macos-12
+    steps:
+      - name: Execute sh file
+        run: |
+          bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
+          chmod +x risc_v_counter/doit.sh
+          cd risc_v_counter
+          ./doit.sh
