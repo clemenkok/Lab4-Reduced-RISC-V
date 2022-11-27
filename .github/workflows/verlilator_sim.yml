@@ -12,8 +12,8 @@ jobs:
       - name: Execute sh file
         run: |
           bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
-          chmod +x risc_v_counter/doit.sh
-          cd risc_v_counter
+          chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
+          cd Lab4-Reduced-RISC-V/risc_v_counter
           ./doit.sh
           
   mac_os:
@@ -22,6 +22,6 @@ jobs:
       - name: Execute sh file
         run: |
           bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
-          chmod +x risc_v_counter/doit.sh
-          cd risc_v_counter
+          chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
+          cd Lab4-Reduced-RISC-V/risc_v_counter
           ./doit.sh
