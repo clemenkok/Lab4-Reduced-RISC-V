@@ -1,6 +1,6 @@
 name: Build Verilator simulation file
 
-on: push
+on: [push, pull_request]
 
 jobs:
   ubuntu:

@@ -1,3 +1,16 @@
+// include all created components
+`include "control_unit/instr_mem/instr_mem.sv"
+`include "control_unit/control_unit/control_unit.sv"
+`include "control_unit/sign_extend/sign_extend.sv"
+`include "pc/pc_mux.sv"
+`include "pc/pcReg.sv"
+`include "alu/alusrc.sv"
+`include "alu/alu.sv"
+`include "alu/reg_file.sv"
+`include "alu/data_mem.sv"
+
+
+// create top level module
 module risc_v #(
     parameter ADDRESS_WIDTH = 32,
     parameter DATA_WIDTH = 32
