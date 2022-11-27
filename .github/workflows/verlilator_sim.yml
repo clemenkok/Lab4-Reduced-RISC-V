@@ -20,8 +20,8 @@ jobs:
         run: bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
       - name: Build and Run Simulation
         run: |
-          chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
-          cd Lab4-Reduced-RISC-V/risc_v_counter
+          chmod +x Lab4-Reduced-RISC-V/doit.sh
+          cd Lab4-Reduced-RISC-V
           ./doit.sh
           
   mac_os:
@@ -38,6 +38,6 @@ jobs:
         run: bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
       - name: Build and Run Simulation
         run: |
-          chmod +x Lab4-Reduced-RISC-V/risc_v_counter/doit.sh
-          cd Lab4-Reduced-RISC-V/risc_v_counter
+          chmod +x Lab4-Reduced-RISC-V/doit.sh
+          cd Lab4-Reduced-RISC-V
           ./doit.sh
