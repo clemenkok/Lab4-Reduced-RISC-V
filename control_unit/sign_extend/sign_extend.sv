@@ -10,8 +10,9 @@ module sign_extend #(
 
     always_comb 
     
-            case ({instr[6:0],instr[14:12],ImmSrc[11]})
+            casez ({instr[6:0],instr[14:12],ImmSrc[11]})
                 {7'b0010011, 3'b000, 1'b1}:     ImmOp = {20'b11111111111111111111, ImmSrc};
+                {7'b1100011, 3'b???, 1'b?}:     ImmOp = {19'b1111111111111111111, ImmSrc, 1'b0};
                 default:                        ImmOp = {20'b0, ImmSrc};
             endcase
     
