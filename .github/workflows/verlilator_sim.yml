@@ -9,6 +9,13 @@ jobs:
         runner: [ubuntu-20.04]
     runs-on: ${{ matrix.runner }}
     steps:
+      - name: Checkout Lab4-Reduced-RISC-V
+        uses: actions/checkout@v2
+        with:
+          path: Lab4-Reduced-RISC-V
+          persist-credentials: false
+          submodules: "recursive"
+          fetch-depth: 2
       - name: Execute sh file
         run: |
           bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
@@ -19,6 +26,13 @@ jobs:
   mac_os:
     runs-on: macos-12
     steps:
+      - name: Checkout Lab4-Reduced-RISC-V
+        uses: actions/checkout@v2
+        with:
+          path: Lab4-Reduced-RISC-V
+          persist-credentials: false
+          submodules: "recursive"
+          fetch-depth: 2
       - name: Execute sh file
         run: |
           bash <(curl -fsSL https://raw.githubusercontent.com/EIE2-IAC-Labs/Lab0-devtools/main/tools/install.sh)
