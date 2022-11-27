@@ -8,12 +8,15 @@ module control_unit #(
     output  logic   [2:0]               ALUctrl,
     output  logic                       ALUsrc,
     output  logic   [11:0]              ImmSrc,
-    output  logic                       PCsrc
+    output  logic                       PCsrc,
+    output  logic                       MEMWrite,
+    output  logic                       MEMsrc
 );
 
     always_comb
         case ({instr[6:0],instr[14:12]})
             {7'b0010011, 3'b000}:   RegWrite = 1'b1;
+            {7'b0000011, 3'b010}:   RegWrite = 1'b1;
             default: RegWrite = 1'b0;
         endcase
 
@@ -48,6 +51,16 @@ module control_unit #(
             else
                 PCsrc = 1'b0;
         end
+
+    always_comb
+        MEMWrite = 1'b0;
+
+    always_comb 
+        case ({instr[6:0],instr[14:12]})
+            {7'b0000011, 3'b010}:   MEMsrc = 1'b1;
+            default:                MEMsrc = 1'b0;
+            
+        endcase
 
             
 

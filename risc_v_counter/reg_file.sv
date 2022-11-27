@@ -31,6 +31,6 @@ module reg_file #(
 
     assign RD1 = regfile [AD1]; // RD1 outputs the AD1 Register value
     assign RD2 = regfile [AD2];  // as above
-    assign a0 = regfile [AD1]; // a0 refers to register x10 in RISC-V instruction set. using to debug
+    assign a0 = regfile [10]; // a0 refers to register x10 in RISC-V instruction set. using to debug
 
 endmodule
