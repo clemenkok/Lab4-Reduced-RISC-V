@@ -1,3 +1,16 @@
+// include all created components
+`include "control_unit/instr_mem/instr_mem.sv"
+`include "control_unit/control_unit/control_unit.sv"
+`include "control_unit/sign_extend/sign_extend.sv"
+`include "pc/pc_mux.sv"
+`include "pc/pcReg.sv"
+`include "alu/alusrc.sv"
+`include "alu/alu.sv"
+`include "alu/reg_file.sv"
+`include "alu/data_mem.sv"
+
+
+// create top level module
 module risc_v #(
     parameter ADDRESS_WIDTH = 32,
     parameter DATA_WIDTH = 32
@@ -11,7 +24,7 @@ module risc_v #(
 
 
 
-logic                     PCsrc, EQ, RegWrite, ALUsrc;
+logic                     PCsrc, EQ, RegWrite, ALUsrc, MEMWrite, MEMsrc;
 logic [ADDRESS_WIDTH-1:0] ImmOp, pc;
 logic [4:0]               rs1, rs2, rd;
 logic [2:0]               ALUctrl;
@@ -40,7 +53,9 @@ control_unit #(DATA_WIDTH) my_control_unit(
     .ALUctrl (ALUctrl),
     .ALUsrc (ALUsrc),
     .ImmSrc (ImmSrc),
-    .PCsrc (PCsrc)
+    .PCsrc (PCsrc),
+    .MEMWrite (MEMWrite),
+    .MEMsrc (MEMsrc)
 );
 sign_extend #(DATA_WIDTH, 12) my_sign_extend(
     .instr (instr),
@@ -69,7 +84,7 @@ pcReg #(ADDRESS_WIDTH) pcReg(
 
 
 //Top_ALU
-logic [ADDRESS_WIDTH-1:0] ALUop1, ALUop2, regOp2, ALUout;
+logic [ADDRESS_WIDTH-1:0] ALUop1, ALUop2, regOp2, ALUout, MEMdata;
 
 alusrc #(ADDRESS_WIDTH) alusrc (
     .regOp2 (regOp2),
@@ -90,10 +105,17 @@ reg_file #(5, DATA_WIDTH)reg_file (
     .AD2 (rs2),
     .AD3 (rd),
     .WE3 (RegWrite),
-    .WD3 (ALUout),
+    .WD3 (MEMsrc ? MEMdata : ALUout),
     .RD1 (ALUop1),
     .RD2 (regOp2),
     .a0 (a0)
+);
+data_mem #(8, 32) data_mem (
+    .clk (clk),
+    .WE (MEMWrite),
+    .A (ALUop1[7:0]),
+    .WD (ALUop2),
+    .RD (MEMdata)
 );
 
 assign pc_addr = pc[7:0];

@@ -1,7 +1,6 @@
 module data_mem #(
     parameter ADDRESS_WIDTH = 32,
-    parameter DATA_WIDTH = 32,
-    parameter REGISTER_WIDTH = 32
+    parameter DATA_WIDTH = 32
 ) (
     input  logic                             clk,
     input  logic                             WE,
@@ -10,7 +9,7 @@ module data_mem #(
     output logic     [DATA_WIDTH-1:0]        RD
 );
 
-    logic   [REGISTER_WIDTH-1:0]     data_mem_register     [REGISTER_WIDTH-1:0]; // figuring out how to load regfile with initial values
+    logic   [DATA_WIDTH-1:0]     data_mem_register     [2**ADDRESS_WIDTH-1:0]; // figuring out how to load regfile with initial values
 
     initial begin
         $readmemh("datarom.mem", data_mem_register); // remove when merge; prove of workability

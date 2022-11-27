@@ -30,6 +30,7 @@ class Vrisc_v___024root final : public VerilatedModule {
     IData/*31:0*/ risc_v__DOT__ALUop2;
     VlUnpacked<IData/*31:0*/, 256> risc_v__DOT__my_instr_mem__DOT__rom_array;
     VlUnpacked<IData/*31:0*/, 32> risc_v__DOT__reg_file__DOT__regfile;
+    VlUnpacked<IData/*31:0*/, 256> risc_v__DOT__data_mem__DOT__data_mem_register;
     VlUnpacked<CData/*0:0*/, 2> __Vm_traceActivity;
 
     // INTERNAL VARIABLES

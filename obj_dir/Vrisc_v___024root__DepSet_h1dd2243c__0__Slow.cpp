@@ -12,6 +12,7 @@ VL_ATTR_COLD void Vrisc_v___024root___initial__TOP__0(Vrisc_v___024root* vlSelf)
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vrisc_v___024root___initial__TOP__0\n"); );
     // Init
     VlWide<6>/*191:0*/ __Vtemp_h5035a0a6__0;
+    VlWide<3>/*95:0*/ __Vtemp_hb978afc8__0;
     // Body
     __Vtemp_h5035a0a6__0[0U] = 0x2e6d656dU;
     __Vtemp_h5035a0a6__0[1U] = 0x696f6e73U;
@@ -22,6 +23,12 @@ VL_ATTR_COLD void Vrisc_v___024root___initial__TOP__0(Vrisc_v___024root* vlSelf)
     VL_READMEM_N(true, 32, 256, 0, VL_CVT_PACK_STR_NW(6, __Vtemp_h5035a0a6__0)
                  ,  &(vlSelf->risc_v__DOT__my_instr_mem__DOT__rom_array)
                  , 0, ~0ULL);
+    __Vtemp_hb978afc8__0[0U] = 0x2e6d656dU;
+    __Vtemp_hb978afc8__0[1U] = 0x61726f6dU;
+    __Vtemp_hb978afc8__0[2U] = 0x646174U;
+    VL_READMEM_N(true, 32, 256, 0, VL_CVT_PACK_STR_NW(3, __Vtemp_hb978afc8__0)
+                 ,  &(vlSelf->risc_v__DOT__data_mem__DOT__data_mem_register)
+                 , 0, ~0ULL);
 }
 
 VL_ATTR_COLD void Vrisc_v___024root___settle__TOP__0(Vrisc_v___024root* vlSelf) {
@@ -30,11 +37,11 @@ VL_ATTR_COLD void Vrisc_v___024root___settle__TOP__0(Vrisc_v___024root* vlSelf) 
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vrisc_v___024root___settle__TOP__0\n"); );
     // Body
     vlSelf->pc_addr = (0xffU & vlSelf->risc_v__DOT__pc);
+    vlSelf->a0 = vlSelf->risc_v__DOT__reg_file__DOT__regfile
+        [0xaU];
     vlSelf->risc_v__DOT__instr = vlSelf->risc_v__DOT__my_instr_mem__DOT__rom_array
         [(0xffU & vlSelf->risc_v__DOT__pc)];
     vlSelf->instruction = vlSelf->risc_v__DOT__instr;
-    vlSelf->a0 = vlSelf->risc_v__DOT__reg_file__DOT__regfile
-        [(0x1fU & (vlSelf->risc_v__DOT__instr >> 0xfU))];
     vlSelf->risc_v__DOT__ALUop1 = vlSelf->risc_v__DOT__reg_file__DOT__regfile
         [(0x1fU & (vlSelf->risc_v__DOT__instr >> 0xfU))];
     if ((0x98U == ((0x3f8U & (vlSelf->risc_v__DOT__instr 
@@ -132,6 +139,8 @@ VL_ATTR_COLD void Vrisc_v___024root___eval_initial(Vrisc_v___024root* vlSelf) {
     VL_DEBUG_IF(VL_DBG_MSGF("+    Vrisc_v___024root___eval_initial\n"); );
     // Body
     Vrisc_v___024root___initial__TOP__0(vlSelf);
+    vlSelf->__Vm_traceActivity[1U] = 1U;
+    vlSelf->__Vm_traceActivity[0U] = 1U;
     vlSelf->__Vclklast__TOP__clk = vlSelf->clk;
 }
 
@@ -175,6 +184,9 @@ VL_ATTR_COLD void Vrisc_v___024root___ctor_var_reset(Vrisc_v___024root* vlSelf) 
     }
     for (int __Vi0=0; __Vi0<32; ++__Vi0) {
         vlSelf->risc_v__DOT__reg_file__DOT__regfile[__Vi0] = VL_RAND_RESET_I(32);
+    }
+    for (int __Vi0=0; __Vi0<256; ++__Vi0) {
+        vlSelf->risc_v__DOT__data_mem__DOT__data_mem_register[__Vi0] = VL_RAND_RESET_I(32);
     }
     for (int __Vi0=0; __Vi0<2; ++__Vi0) {
         vlSelf->__Vm_traceActivity[__Vi0] = VL_RAND_RESET_I(1);
