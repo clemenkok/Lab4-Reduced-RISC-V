@@ -18,8 +18,8 @@ class Vrisc_v___024root final : public VerilatedModule {
     VL_OUT8(pc_addr,7,0);
     CData/*0:0*/ risc_v__DOT__EQ;
     CData/*2:0*/ risc_v__DOT__ALUctrl;
+    CData/*1:0*/ risc_v__DOT__ImmSrc;
     CData/*0:0*/ __Vclklast__TOP__clk;
-    SData/*11:0*/ risc_v__DOT__ImmSrc;
     VL_OUT(a0,31,0);
     VL_OUT(instruction,31,0);
     IData/*31:0*/ risc_v__DOT__ImmOp;

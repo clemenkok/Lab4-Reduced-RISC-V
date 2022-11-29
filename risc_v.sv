@@ -33,7 +33,7 @@ logic [2:0]               ALUctrl;
 
 //Top_CU
 logic   [DATA_WIDTH-1:0]    instr;
-logic   [11:0]              ImmSrc;
+logic   [1:0]              ImmSrc;
 
 assign rs1  = instr[19:15];
 assign rs2  = instr[24:20];
@@ -57,7 +57,7 @@ control_unit #(DATA_WIDTH) my_control_unit(
     .MEMWrite (MEMWrite),
     .MEMsrc (MEMsrc)
 );
-sign_extend #(DATA_WIDTH, 12) my_sign_extend(
+sign_extend #(DATA_WIDTH) my_sign_extend(
     .instr (instr),
     .ImmSrc (ImmSrc),    
     .ImmOp (ImmOp)

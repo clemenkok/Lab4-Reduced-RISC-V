@@ -7,41 +7,49 @@ module control_unit #(
     output  logic                       RegWrite,
     output  logic   [2:0]               ALUctrl,
     output  logic                       ALUsrc,
-    output  logic   [11:0]              ImmSrc,
+    output  logic   [1:0]               ImmSrc,
     output  logic                       PCsrc,
     output  logic                       MEMWrite,
     output  logic                       MEMsrc
 );
-
+    //RegWrite
     always_comb
-        case ({instr[6:0],instr[14:12]})
-            {7'b0010011, 3'b000}:   RegWrite = 1'b1;
-            {7'b0000011, 3'b010}:   RegWrite = 1'b1;
+        casez ({instr[6:0],instr[14:12]})
+            {7'b0000011, 3'b???}:   RegWrite = 1'b1;
+            {7'b0010011, 3'b???}:   RegWrite = 1'b1;
             default: RegWrite = 1'b0;
         endcase
 
+    //ALUctrl
     always_comb
         case ({instr[6:0],instr[14:12]})
-            {7'b0010011, 3'b000}:   ALUctrl = 3'b0;
+            {7'b0010011, 3'b000}:   ALUctrl = 3'b000;
+            {7'b0010011, 3'b110}:   ALUctrl = 3'b011; //or
+            {7'b0010011, 3'b010}:   ALUctrl = 3'b101; //slt
+            {7'b0010011, 3'b111}:   ALUctrl = 3'b010; //and
+            {7'b0000011, 3'b010}:   ALUctrl = 3'b000; //lw
+            {7'b0100011, 3'b010}:   ALUctrl = 3'b000; //sw
             default: ALUctrl = 3'b111;
         endcase
 
+    //ALUsrc
     always_comb
-        case ({instr[6:0],instr[14:12]})
-            {7'b0010011, 3'b000}:   ALUsrc = 1'b1;
+        casez ({instr[6:0],instr[14:12]})
+            {7'b0010011, 3'b???}:   ALUsrc = 1'b1;
+            {7'b0000011, 3'b???}:   ALUsrc = 1'b1;
             default: ALUsrc = 1'b0;
         endcase
 
+    //ImmSrc
     always_comb
-        begin
-            if ({instr[6:0],instr[14:12]} == {7'b0010011, 3'b000})
-                ImmSrc = {instr[31:20]};
-            else if ({instr[6:0],instr[14:12]} == {7'b1100011,3'b001})
-                ImmSrc = {instr[31],instr[7],instr[30:25],instr[11:8]};
-            else
-                ImmSrc = {instr[31:20]};
-        end
+            casez ({instr[6:0],instr[14:12]})
+                {7'b0000011, 3'b???}:     ImmSrc = 2'b00;
+                {7'b0010011, 3'b???}:     ImmSrc = 2'b00;
+                {7'b1100011, 3'b???}:     ImmSrc = 2'b10;
+                default:                        ImmSrc = 2'b00;
+            endcase
 
+    //PCsrc
     always_comb
         begin
             if (({instr[6:0],instr[14:12]} == {7'b1100011,3'b000}) && EQ)
@@ -52,14 +60,18 @@ module control_unit #(
                 PCsrc = 1'b0;
         end
 
+    //MEMWrite
     always_comb
-        MEMWrite = 1'b0;
+        case ({instr[6:0],instr[14:12]})
+            {7'b0100011, 3'b010}:   MEMWrite = 1'b1;
+            default:                MEMWrite = 1'b0;
+        endcase
 
+    //MEMsrc
     always_comb 
         case ({instr[6:0],instr[14:12]})
             {7'b0000011, 3'b010}:   MEMsrc = 1'b1;
             default:                MEMsrc = 1'b0;
-            
         endcase
 
             

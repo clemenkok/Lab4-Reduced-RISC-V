@@ -1,28 +1,18 @@
 /* verilator lint_off UNUSED */
 module sign_extend #(
-    parameter   DATA_WIDTH = 32,
-                IMM_WIDTH = 12
+    parameter   DATA_WIDTH = 32
 )(
     input   logic [DATA_WIDTH-1:0]  instr,
-    input   logic [IMM_WIDTH-1:0]   ImmSrc,    
+    input   logic [1:0]   ImmSrc,    
     output  logic [DATA_WIDTH-1:0]  ImmOp
 );
 
     always_comb 
-    
-            casez ({instr[6:0],instr[14:12],ImmSrc[11]})
-                {7'b0010011, 3'b000, 1'b1}:     ImmOp = {20'b11111111111111111111, ImmSrc};
-                {7'b1100011, 3'b???, 1'b?}:     ImmOp = {19'b1111111111111111111, ImmSrc, 1'b0};
-                default:                        ImmOp = {20'b0, ImmSrc};
+            case (ImmSrc)
+                2'b00 :     ImmOp = {{20{instr[31]}}, instr[31:20]};
+                2'b01 :     ImmOp = {{20{instr[31]}}, instr[31:25], instr[11:7]};
+                2'b10 :     ImmOp = {{20{instr[31]}}, instr[7], instr[30:25], instr[11:8], 1'b0};
+                default:    ImmOp = {{20{instr[31]}}, instr[31:20]};
             endcase
-    
-    /*
-        begin
-            if (({instr[6:0],instr[14:12]} == 10'b0010011000) && (ImmSrc[11] == 1'b1))
-                ImmOp = {20'b11111111111111111111, ImmSrc};
-            else
-                ImmOp = {20'b0, ImmSrc};
-        end
-    */
 
 endmodule
